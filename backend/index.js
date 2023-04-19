@@ -1,22 +1,16 @@
 import { Configuration, OpenAIApi } from "openai";
-// const { Configuration, OpenAIApi } = require("openai");
 
+const API = "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";
 const configuration = new Configuration({
-    apiKey: "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",
+    apiKey: API,
 });
 const openai = new OpenAIApi(configuration);
-
-const apiCall = async () => {
-    try {
-        const res = await openai.createCompletion({
-            model: "text-davinci-003",
-            prompt: "hello world",
-        });
-        console.log(res.data.choices[0].text);
-        return res;
-    } catch (e) {
-        console.error(e);
-    }
+const callApi = async () => {
+    const completion = await openai.createChatCompletion({
+        model: "gpt-3.5-turbo",
+        messages: [{ role: "user", content: "Hello world" }],
+    });
+    console.log(completion.data.choices[0].message);
 };
 
-apiCall();
+callApi();
