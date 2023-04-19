@@ -1,0 +1,9 @@
+{
+    "name": "chatbotvite-backend",
+    "private": true,
+    "version": "0.0.0",
+    "type": "module",
+    "dependencies": {
+        "openai": "^3.2.1"
+    }
+}
