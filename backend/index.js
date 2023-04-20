@@ -1,7 +1,8 @@
 import { Configuration, OpenAIApi } from "openai";
 import express from "express";
 import cors from "cors";
-const API = "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";
+const API = "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";
+//TODO:API가릴것
 
 //express;
 const app = express();
@@ -16,9 +17,11 @@ app.use(cors());
 app.use(express.json()); // parsing application/json
 app.use(express.urlencoded({ extended: true })); //parsing application/x-www
 
-app.get("/moviebot", async function (req, res) {
+app.post("/moviebot", async function (req, res) {
     const answer = await callApi();
-    res.send(answer);
+    // res.send(answer);
+    console.log("answer :", answer);
+    res.json({ assistant: answer });
 });
 app.listen(3000);
 
