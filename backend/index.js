@@ -37,9 +37,6 @@ app.post("/moviebot", async function (req, res) {
     messages = [...messages, { role: "user", content: req.body.user }];
     const answer = await callApi(messages);
     // res.send(answer);
-    console.log("요청", req.body);
-    console.log("메시징", messages);
-    console.log("결과", answer);
     messages = [
         ...messages,
         {
