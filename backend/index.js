@@ -1,8 +1,9 @@
 import { Configuration, OpenAIApi } from "openai";
 import express from "express";
 import cors from "cors";
-const API = "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";
-//TODO:API가릴것
+import dotenv from "dotenv";
+dotenv.config();
+const API = process.env.API_KEY;
 
 //express;
 const app = express();
@@ -54,6 +55,7 @@ const configuration = new Configuration({
     apiKey: API,
 });
 const openai = new OpenAIApi(configuration);
+console.log(API, "키인증");
 const callApi = async () => {
     try {
         const completion = await openai.createChatCompletion({
