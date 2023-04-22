@@ -1,12 +1,14 @@
+import { QueryClient, QueryClientProvider } from "react-query";
 import ChatMain from "./components/ChatMain";
 
 function App() {
-    const api = import.meta.env.VITE_APP_openai_API_KEY;
-    console.log(api);
+    const queryClient = new QueryClient();
     return (
-        <div className="App">
-            <ChatMain />
-        </div>
+        <QueryClientProvider client={queryClient}>
+            <div className="App">
+                <ChatMain />
+            </div>
+        </QueryClientProvider>
     );
 }
 
