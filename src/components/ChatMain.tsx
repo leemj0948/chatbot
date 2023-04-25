@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useQuery } from "react-query";
 import styled, { keyframes } from "styled-components";
 
@@ -9,20 +9,21 @@ type MessageType = {
 };
 
 const ChatMain = () => {
+    const userInput = useRef("");
     const [chatbot, setChatbot] = useState<MessageType[]>([
         {
             assistant:
-                "안녕하세요. 좋아하는 영화와 성향을 말해주시면 영화를 추천해드릴게요.",
+                "안녕하세요. 당신의 반려묘의 행동을 예측해서 답변해드립니다. 질문해보세요.",
             user: "",
         },
     ]);
-    const [userinput, setUserinput] = useState<string>("");
+    // const [userinput, setUserinput] = useState(userInput.current);
     const [queryKey, setQueryKey] = useState([1]);
 
     const callApi = async (): Promise<string | undefined> => {
         try {
             const res = await axios.post("http://localhost:3000/moviebot", {
-                user: userinput,
+                user: userInput.current,
             });
             return res.data.assistant;
         } catch (err) {
@@ -37,7 +38,7 @@ const ChatMain = () => {
             onSuccess: (data: string) => {
                 setChatbot((prev) => [
                     ...prev,
-                    { assistant: data, user: userinput },
+                    { assistant: data, user: userInput.current },
                 ]);
                 setQueryKey((prev) => [...prev, prev[prev.length] + 1]);
             },
@@ -47,25 +48,34 @@ const ChatMain = () => {
                     {
                         assistant:
                             "에러가 발생하였습니다. 다시한번 질문해주세요.",
-                        user: userinput,
+                        user: userInput.current,
                     },
                 ]);
             },
         }
     );
+
     const inputHandeler = (e: React.ChangeEvent<HTMLInputElement>): void => {
         const { value } = e.target;
-        setUserinput(value);
+        userInput.current = value;
     };
     const onSend = async (
         e: React.MouseEvent<HTMLButtonElement>
     ): Promise<void> => {
         e.preventDefault();
+        // if (userinput === "") {
+        //     setUserinput(userInput.current);
+        // }
         await refetch();
-
-        setUserinput("");
+        userInput.current = "";
+        // setUserinput("");
     };
-
+    const isEnter = async (e: React.KeyboardEvent) => {
+        if (e.key === "Enter") {
+            await refetch();
+            userInput.current = "";
+        }
+    };
     return (
         <div>
             <div>
@@ -79,14 +89,14 @@ const ChatMain = () => {
                 })}
             </div>
             <div>
-                <UserInput onChange={inputHandeler} value={userinput} />
+                <UserInput onChange={inputHandeler} onKeyUp={isEnter} />
                 <span>
                     {!isLoading ? (
                         <SendBtn onClick={onSend}>보내기</SendBtn>
                     ) : (
                         <>
                             <Dot />
-                            <p>생각하는중 ...</p>
+                            <p>분석 하는중 ...</p>
                         </>
                     )}
                 </span>
