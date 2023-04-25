@@ -1,12 +1,21 @@
+import { QueryClient, QueryClientProvider } from "react-query";
 import ChatMain from "./components/ChatMain";
+import LandingPage from "./components/LandingPage";
+import ChatBg from "./components/ChatBg";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 function App() {
-    const api = import.meta.env.VITE_APP_openai_API_KEY;
-    console.log(api);
+    const queryClient = new QueryClient();
     return (
-        <div className="App">
-            <ChatMain />
-        </div>
+        <QueryClientProvider client={queryClient}>
+            <BrowserRouter>
+                <Routes>
+                    <Route path="/" element={<LandingPage />} />
+                    <Route path="/catbot" element={<ChatMain />} />
+                    <Route path="bg" element={<ChatBg />} />
+                </Routes>
+            </BrowserRouter>
+        </QueryClientProvider>
     );
 }
 
