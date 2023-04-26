@@ -35,42 +35,41 @@ const LeftCat = ({ namedColors }: Props) => {
 };
 
 const catLeftType = keyframes`
-    2%  {transform: translateY(-8px)}
+    2%  {transform: translateY(-3.875vw)}
     6%  {transform: none}
-    8%  {transform: translateY(-8px)}
+    8%  {transform: translateY(-3.875vw)}
     10% {transform: none}
-    14% {transform: translateY(-8px)}
+    14% {transform: translateY(-3.875vw)}
     16% {transform: none}
-    18% {transform: translateY(-8px)}
+    18% {transform: translateY(-3.875vw)}
     20% {transform: none}
-    22% {transform: translateY(-8px)}
+    22% {transform: translateY(-3.875vw)}
     26% {transform: none} 
 `;
 const catRightType = keyframes`
-    6%  {transform: translateY(-8px)}
+    6%  {transform: translateY(-3.875vw)}
     8%  {transform: none}
-    10% {transform: translateY(-8px)}
+    10% {transform: translateY(-3.875vw)}
     12% {transform: none}
-    16% {transform: translateY(-8px)}
+    16% {transform: translateY(-3.875vw)}
     18% {transform: none}
-    20% {transform: translateY(-8px)}
+    20% {transform: translateY(-3.875vw)}
     22% {transform: none}
-    24% {transform: translateY(-8px)}
+    24% {transform: translateY(-3.875vw)}
     28% {transform: none}    
 `;
 const eyeControl = keyframes`
     55% {transform: none}
-    62% {transform: translateX(-2px)}
+    62% {transform: translateX(-0.8vw)}
     70% {
         transition-timing-function: ease-out;
-        transform: translateX(3px)}
-    82% {transform: translateX(-2px)}
+        transform: translateX(1.2vw)}
+    82% {transform: translateX(-0.8vw)}
     90% {
         transition-timing-function: ease-out;
-        transform: translateX(3px)}
+        transform: translateX(1.2vw)}
     100%{transform: none}  
 `;
-
 const CatL = styled.div`
     height: 182px;
     width: 200px;
