@@ -11,8 +11,7 @@ function App() {
             <BrowserRouter>
                 <Routes>
                     <Route path="/" element={<LandingPage />} />
-                    <Route path="/catbot" element={<ChatMain />} />
-                    <Route path="bg" element={<ChatBg />} />
+                    <Route path="/catbot" element={<ChatBg />} />
                 </Routes>
             </BrowserRouter>
         </QueryClientProvider>
