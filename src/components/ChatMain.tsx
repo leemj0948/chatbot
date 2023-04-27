@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useQuery } from "react-query";
 import styled, { keyframes } from "styled-components";
 
@@ -9,37 +9,29 @@ type MessageType = {
 };
 
 const ChatMain = () => {
-    const userInput = useRef("");
     const [chatbot, setChatbot] = useState<MessageType[]>([
         {
             assistant:
-                "안녕하세요. 당신의 반려묘의 행동을 예측해서 답변해드립니다. 질문해보세요.",
+                "안녕하세요. 당신의 친구이자 반려묘의 이름은 뭐냐 냥? 지금 뭐하고 있는지도 알려주면 더 좋다 냥",
             user: "",
         },
-        {
-            assistant: "두번째메시지",
-            user: "ddddd",
-        },
-        {
-            assistant: "세번째메시지",
-            user: "좋아",
-        },
-        {
-            assistant: "네번째메시지",
-            user: "이정도로 길게 쓰면 어떻게 나올까 궁금하지 않아? 자 한번 봐라",
-        },
-        {
-            assistant: "네번째메시지",
-            user: "이정도로 길게 쓰면 어떻게 나올까 궁금하지 않아? 자 한번 봐라.이정도로 길게 쓰면 어떻게 나올까 궁금하지 않아? 자 한번 봐라이정도로 길게 쓰면 어떻게 나올까 궁금하지 않아? 자 한번 봐라이정도로 길게 쓰면 어떻게 나올까 궁금하지 않아? 자 한번 봐라이정도로 길게 쓰면 어떻게 나올까 궁금하지 않아? 자 한번 봐라이정도로 길게 쓰면 어떻게 나올까 궁금하지 않아? 자 한번 봐라",
-        },
     ]);
-    // const [userinput, setUserinput] = useState(userInput.current);
+    const [userinput, setUserinput] = useState("");
     const [queryKey, setQueryKey] = useState([1]);
+    const scrollRef = useRef(null);
+    useEffect(() => {
+        const scrollElement = scrollRef.current;
+
+        scrollElement &&
+            (scrollElement as HTMLElement).scrollIntoView({
+                behavior: "smooth",
+            });
+    }, [chatbot]);
 
     const callApi = async (): Promise<string | undefined> => {
         try {
             const res = await axios.post("http://localhost:3000/moviebot", {
-                user: userInput.current,
+                user: userinput,
             });
             return res.data.assistant;
         } catch (err) {
@@ -52,47 +44,66 @@ const ChatMain = () => {
         {
             enabled: false,
             onSuccess: (data: string) => {
-                setChatbot((prev) => [
-                    ...prev,
-                    { assistant: data, user: userInput.current },
-                ]);
-                setQueryKey((prev) => [...prev, prev[prev.length] + 1]);
+                if (data == "undefined") {
+                    setChatbot((prev) => [
+                        ...prev,
+                        {
+                            assistant:
+                                "잘모르겠다 냥..에러 다 냥.. 고장났다 냥 🙀",
+                            user: userinput,
+                        },
+                    ]);
+                    setQueryKey((prev) => [...prev, prev[prev.length] + 1]);
+                } else {
+                    setChatbot((prev) => [
+                        ...prev,
+                        { assistant: data, user: userinput },
+                    ]);
+                    setQueryKey((prev) => [...prev, prev[prev.length] + 1]);
+                }
             },
             onError: () => {
                 setChatbot((prev) => [
                     ...prev,
                     {
-                        assistant:
-                            "에러가 발생하였습니다. 다시한번 질문해주세요.",
-                        user: userInput.current,
+                        assistant: "에러다 냥! 다시한번 말해봐라 냥.",
+                        user: userinput,
                     },
                 ]);
             },
         }
     );
 
-    const inputHandeler = (e: React.ChangeEvent<HTMLInputElement>): void => {
-        const { value } = e.target;
-        userInput.current = value;
-    };
+    const inputHandeler = useCallback(
+        (e: React.ChangeEvent<HTMLInputElement>): void => {
+            const { value } = e.target;
+            setUserinput(value);
+        },
+        []
+    );
     const onSend = async (
         e: React.MouseEvent<HTMLButtonElement>
     ): Promise<void> => {
         e.preventDefault();
-        // if (userinput === "") {
-        //     setUserinput(userInput.current);
-        // }
+        if (!userinput) {
+            return;
+        }
         await refetch();
-        userInput.current = "";
-        // setUserinput("");
+
+        setUserinput("");
     };
     const isEnter = async (e: React.KeyboardEvent) => {
         if (e.key === "Enter") {
+            if (!userinput) {
+                return;
+            }
             await refetch();
-            userInput.current = "";
+
+            setUserinput("");
         }
     };
-    console.log(chatbot);
+    const displayValue = useMemo(() => userinput, [userinput]);
+
     return (
         <MessageFrame>
             <ChatBox>
@@ -109,16 +120,25 @@ const ChatMain = () => {
                     {chatbot.map((message: MessageType, i: number) => {
                         return (
                             <div key={i}>
-                                <Incoming>
-                                    <Bubble isUser={false}>
-                                        {message.assistant}
-                                    </Bubble>
-                                </Incoming>
                                 {message.user && (
                                     <Outcoming>
                                         <Bubble isUser>{message.user}</Bubble>
                                     </Outcoming>
                                 )}
+                                {message.assistant ? (
+                                    <Incoming>
+                                        <Bubble isUser={false}>
+                                            {message.assistant}
+                                        </Bubble>
+                                    </Incoming>
+                                ) : (
+                                    <Incoming>
+                                        <Bubble isUser={false}>
+                                            잘모르겠다 냥! 다시한번 말해봐라 냥!
+                                        </Bubble>
+                                    </Incoming>
+                                )}
+                                <div ref={scrollRef} />
                             </div>
                         );
                     })}
@@ -138,11 +158,14 @@ const ChatMain = () => {
             <BottomBar>
                 <Chat>
                     <input
+                        value={displayValue}
                         onChange={inputHandeler}
                         onKeyUp={isEnter}
                         placeholder="여기에 입력해라 냥"
                     />
-                    <button onClick={onSend}>전송</button>
+                    <button onClick={onSend} disabled={isLoading}>
+                        전송
+                    </button>
                 </Chat>
             </BottomBar>
         </MessageFrame>
@@ -220,6 +243,8 @@ const Middle = styled.div`
     opacity: 0.85;
     top: 60px;
     height: 89%;
+    overflow: scroll;
+    max-height: 604px;
 `;
 const VoldeMort = styled.div`
     width: 100%;
@@ -249,8 +274,8 @@ const Outcoming = styled.div`
 `;
 const Typing = styled.div`
     position: absolute;
-    top: 85%;
-    left: 20px;
+    top: 90%;
+    right: 10%;
     .bubble {
         background: #777777;
         opacity: 45%;
