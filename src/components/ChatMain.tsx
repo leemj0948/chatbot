@@ -12,7 +12,7 @@ const ChatMain = () => {
     const [chatbot, setChatbot] = useState<MessageType[]>([
         {
             assistant:
-                "안녕하세요. 당신의 반려묘의 행동을 예측해서 답변해드립니다. 질문해보세요.",
+                "안녕하세요. 당신의 친구이자 반려묘의 이름은 뭐냐 냥? 지금 뭐하고 있는지도 알려주면 더 좋다 냥",
             user: "",
         },
     ]);
