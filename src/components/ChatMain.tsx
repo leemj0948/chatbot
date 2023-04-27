@@ -18,6 +18,15 @@ const ChatMain = () => {
     ]);
     const [userinput, setUserinput] = useState("");
     const [queryKey, setQueryKey] = useState([1]);
+    const scrollRef = useRef(null);
+    useEffect(() => {
+        const scrollElement = scrollRef.current;
+
+        scrollElement &&
+            (scrollElement as HTMLElement).scrollIntoView({
+                behavior: "smooth",
+            });
+    }, [chatbot]);
 
     const callApi = async (): Promise<string | undefined> => {
         try {
@@ -35,11 +44,23 @@ const ChatMain = () => {
         {
             enabled: false,
             onSuccess: (data: string) => {
-                setChatbot((prev) => [
-                    ...prev,
-                    { assistant: data, user: userinput },
-                ]);
-                setQueryKey((prev) => [...prev, prev[prev.length] + 1]);
+                if (data == "undefined") {
+                    setChatbot((prev) => [
+                        ...prev,
+                        {
+                            assistant:
+                                "잘모르겠다 냥..에러 다 냥.. 고장났다 냥 🙀",
+                            user: userinput,
+                        },
+                    ]);
+                    setQueryKey((prev) => [...prev, prev[prev.length] + 1]);
+                } else {
+                    setChatbot((prev) => [
+                        ...prev,
+                        { assistant: data, user: userinput },
+                    ]);
+                    setQueryKey((prev) => [...prev, prev[prev.length] + 1]);
+                }
             },
             onError: () => {
                 setChatbot((prev) => [
@@ -104,11 +125,20 @@ const ChatMain = () => {
                                         <Bubble isUser>{message.user}</Bubble>
                                     </Outcoming>
                                 )}
-                                <Incoming>
-                                    <Bubble isUser={false}>
-                                        {message.assistant}
-                                    </Bubble>
-                                </Incoming>
+                                {message.assistant ? (
+                                    <Incoming>
+                                        <Bubble isUser={false}>
+                                            {message.assistant}
+                                        </Bubble>
+                                    </Incoming>
+                                ) : (
+                                    <Incoming>
+                                        <Bubble isUser={false}>
+                                            잘모르겠다 냥! 다시한번 말해봐라 냥!
+                                        </Bubble>
+                                    </Incoming>
+                                )}
+                                <div ref={scrollRef} />
                             </div>
                         );
                     })}
@@ -213,6 +243,8 @@ const Middle = styled.div`
     opacity: 0.85;
     top: 60px;
     height: 89%;
+    overflow: scroll;
+    max-height: 604px;
 `;
 const VoldeMort = styled.div`
     width: 100%;
@@ -242,8 +274,8 @@ const Outcoming = styled.div`
 `;
 const Typing = styled.div`
     position: absolute;
-    top: 85%;
-    left: 20px;
+    top: 90%;
+    right: 10%;
     .bubble {
         background: #777777;
         opacity: 45%;
