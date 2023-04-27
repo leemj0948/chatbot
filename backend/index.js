@@ -69,7 +69,7 @@ app.post("/moviebot", async function (req, res) {
             content: toStrings(answer),
         },
     ];
-    console.log(messages, "메시지");
+
     res.json({ assistant: toStrings(answer) });
 });
 app.listen(3000);
