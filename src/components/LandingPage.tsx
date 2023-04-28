@@ -44,7 +44,7 @@ const BackgroundOverlay = styled.div`
     background-color: rgba(0, 0, 0, 0.3);
 `;
 const TitleWrapper = styled.div`
-    background-color: rgb(103 159 145);
+    background-color: var(--mint);
     padding: 20px;
     border-radius: 10px;
     z-index: 1;

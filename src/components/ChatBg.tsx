@@ -2,37 +2,16 @@ import styled, { keyframes } from "styled-components";
 import LeftCat from "../atom/LeftCat";
 import RightCat from "../atom/RightCat";
 import ChatMain from "./ChatMain";
-export interface namedColor {
-    peach: string;
-    grape: string;
-    darkpurple: string;
-    navy: string;
-    pink: string;
-    cream: string;
-    orange: string;
-    darkorange: string;
-    [color: string]: string;
-}
-const ChatBg = () => {
-    const namedColors: namedColor = {
-        peach: "#FFCA95",
-        grape: "#7C85AB",
-        darkpurple: " #475881",
-        navy: "#20314E",
-        pink: "#FFA5C0",
-        cream: " #FBF1D8",
-        orange: " #FFA852",
-        darkorange: " #F07E42",
-    };
 
+const ChatBg = () => {
     return (
         <Body>
-            <Left peach={namedColors.peach}>
-                <LeftCat namedColors={namedColors} />
+            <Left>
+                <LeftCat />
             </Left>
             <ChatMain />
-            <Right navy={namedColors.navy}>
-                <RightCat namedColors={namedColors} />
+            <Right>
+                <RightCat />
             </Right>
         </Body>
     );
@@ -59,21 +38,21 @@ const Body = styled.section`
     margin: 0;
     padding: 0;
 `;
-const Left = styled.div<{ peach: string }>`
+const Left = styled.div`
     position: absolute;
     height: 100%;
     width: 50%;
-    background: ${(props) => props.peach};
+    background: var(--peach);
     animation: ${slideLeft} 5s ease-in-out;
     animation-fill-mode: forwards;
     z-index: 2;
 `;
-const Right = styled.div<{ navy: string }>`
+const Right = styled.div`
     position: absolute;
     left: 50%;
     height: 100%;
     width: 50%;
-    background: ${(props) => props.navy};
+    background: var(--navy);
     animation: ${slideRight} 5s ease-in-out;
     animation-fill-mode: forwards;
     z-index: 2;

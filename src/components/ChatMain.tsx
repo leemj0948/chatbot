@@ -171,11 +171,7 @@ const ChatMain = () => {
         </MessageFrame>
     );
 };
-// const spin = keyframes`
-//   to {
-//     transform: rotate(360deg);
-//   }
-// `;
+
 const bounce = keyframes`
 30% { transform: translateY(-4px); }
 60% { transform: translateY(0px); }
@@ -242,9 +238,9 @@ const Middle = styled.div`
     width: 100%;
     opacity: 0.85;
     top: 60px;
-    height: 89%;
+    height: 93%;
     overflow: scroll;
-    max-height: 604px;
+    max-height: 1200px;
 `;
 const VoldeMort = styled.div`
     width: 100%;
@@ -348,64 +344,6 @@ const Chat = styled.div`
             transition: all 0.3s ease-in-out;
             color: rgb(32, 49, 78);
         }
-    }
-`;
-
-const UserInput = styled.input``;
-const SendBtn = styled.button``;
-// const Loading = styled.div`
-//     display: inline-block;
-//     width: 20px;
-//     height: 20px;
-//     border-radius: 50%;
-//     border: 2px solid #ccc;
-//     border-top-color: #333;
-//     animation: ${spin} 0.8s ease-in-out infinite;
-// `;
-
-const loading = keyframes`
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-`;
-interface DotProps {
-    size?: string;
-}
-
-const Dot = styled.div<DotProps>`
-    display: inline-block;
-    position: relative;
-    width: ${({ size }) => size ?? "1rem"};
-    height: ${({ size }) => size ?? "1rem"};
-
-    &::before {
-        content: "";
-        display: block;
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        border-radius: 50%;
-        border: ${({ size }) => (size ? `${parseInt(size) / 10}px` : "0.1rem")}
-            solid #ccc;
-        border-color: #ccc transparent transparent transparent;
-        animation: ${loading} 1s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-    }
-    &::after {
-        content: "";
-        display: block;
-        position: absolute;
-        top: ${({ size }) => (size ? `calc(${size} / 10 * -1)` : "-0.5rem")};
-        left: ${({ size }) => (size ? `calc(${size} / 10 * -1)` : "-0.5rem")};
-        width: ${({ size }) => size ?? "1rem"};
-        height: ${({ size }) => size ?? "1rem"};
-        border-radius: 50%;
-        background-color: #fff;
-        transform: rotate(45deg);
     }
 `;
 
