@@ -1,34 +1,25 @@
 import styled, { keyframes } from "styled-components";
-import { namedColor } from "../components/ChatBg";
 
 interface Props {
-    namedColors: namedColor;
+    namedColors?: string;
 }
 
 const LeftCat = ({ namedColors }: Props) => {
     return (
         <CatL>
-            <EarsL darkpurple={namedColors.darkpurple} />
-            <HeadL
-                darkpurple={namedColors.darkpurple}
-                grape={namedColors.grape}>
+            <EarsL />
+            <HeadL>
                 <EyesL />
-                <NoseL cream={namedColors.cream} pink={namedColors.pink} />
+                <NoseL />
             </HeadL>
-            <BodyL grape={namedColors.grape}>
-                <Paw1L cream={namedColors.cream} />
-                <Paw2L cream={namedColors.cream} />
+            <BodyL>
+                <Paw1L />
+                <Paw2L />
             </BodyL>
-            <TailL darkpurple={namedColors.darkpurple} />
+            <TailL />
             <LaptopL>
-                <ScreenL
-                    navy={namedColors.navy}
-                    darkpurple={namedColors.darkpurple}
-                />
-                <KeyboardL
-                    navy={namedColors.navy}
-                    darkpurple={namedColors.darkpurple}
-                />
+                <ScreenL />
+                <KeyboardL />
             </LaptopL>
         </CatL>
     );
@@ -78,12 +69,12 @@ const CatL = styled.div`
     right: 145px;
     transform: translate(0, -50%);
 `;
-const EarsL = styled.div<namedColor>`
+const EarsL = styled.div`
     height: 0;
     width: 0;
     position: relative;
     left: 90px;
-    border-bottom: 27px solid ${(props) => props.darkpurple};
+    border-bottom: 27px solid var(--darkpurple);
     border-left: 10px solid transparent;
     border-right: 23px solid transparent;
     &::before {
@@ -93,20 +84,21 @@ const EarsL = styled.div<namedColor>`
         width: 0;
         position: relative;
         left: 24px;
-        border-bottom: 27px solid ${(props) => props.darkpurple};
+        border-bottom: 27px solid var(--darkpurple);
         border-left: 10px solid transparent;
         border-right: 23px solid transparent;
     }
 `;
-const HeadL = styled.div<{ darkpurple: string; grape: string }>`
+
+const HeadL = styled.div`
     height: 74px;
     width: 135px;
     position: relative;
     left: 65px;
     z-index: 2;
-    box-shadow: -8px 0 0 ${(props) => props.darkpurple};
+    box-shadow: -8px 0 0 var(--darkpurple);
     border-radius: 37px;
-    background: ${(props) => props.grape};
+    background: var(--grape);
 `;
 const EyesL = styled.div`
     height: 12px;
@@ -128,14 +120,14 @@ const EyesL = styled.div`
         background: black;
     }
 `;
-const NoseL = styled.div<{ cream: string; pink: string }>`
+const NoseL = styled.div`
     height: 22px;
     width: 22px;
     position: relative;
     top: 40px;
     left: 60px;
     border-radius: 20px;
-    background: ${(props) => props.cream};
+    background: var(--cream);
     &::before {
         display: block;
         content: "";
@@ -144,7 +136,7 @@ const NoseL = styled.div<{ cream: string; pink: string }>`
         position: relative;
         left: 22px;
         border-radius: 20px;
-        background: ${(props) => props.cream};
+        background: var(--cream);
     }
     &::after {
         display: block;
@@ -155,21 +147,21 @@ const NoseL = styled.div<{ cream: string; pink: string }>`
         top: -22px;
         left: 12px;
         border-radius: 10px;
-        border-top: 10px solid ${(props) => props.pink};
+        border-top: 10px solid var(--pink);
         border-left: 10px solid transparent;
         border-right: 10px solid transparent;
     }
 `;
-const BodyL = styled.div<{ grape: string }>`
+const BodyL = styled.div`
     height: 110px;
     width: 200px;
     position: relative;
     top: -30px;
     z-index: 1;
     border-radius: 55px;
-    background: ${(props) => props.grape};
+    background: var(--grape);
 `;
-const Paw1L = styled.div<namedColor>`
+const Paw1L = styled.div`
     height: 25px;
     width: 37px;
     position: relative;
@@ -177,14 +169,14 @@ const Paw1L = styled.div<namedColor>`
     left: 95px;
     border-radius: 12px;
     animation: 9s ${catLeftType} infinite;
-    background: ${(props) => props.cream};
+    background: var(--cream);
 `;
 const Paw2L = styled(Paw1L)`
     top: 45px;
     left: 142px;
     animation: 9s ${catRightType} infinite;
 `;
-const TailL = styled.div<namedColor>`
+const TailL = styled.div`
     height: 24px;
     width: 80px;
     position: relative;
@@ -192,7 +184,7 @@ const TailL = styled.div<namedColor>`
     left: -31px;
     z-index: 0;
     border-radius: 17px 0 0 17px;
-    background: ${(props) => props.darkpurple};
+    background: var(--darkpurple);
 `;
 const LaptopL = styled.div`
     position: relative;
@@ -200,12 +192,12 @@ const LaptopL = styled.div`
     left: 170px;
     z-index: 2;
 `;
-const ScreenL = styled.div<{ navy: string; darkpurple: string }>`
+const ScreenL = styled.div`
     height: 85px;
     width: 130px;
     border-radius: 8px;
     transform: skew(-18deg);
-    background: ${(props) => props.navy};
+    background: var(--navy);
     &::before {
         display: block;
         content: "";
@@ -215,7 +207,7 @@ const ScreenL = styled.div<{ navy: string; darkpurple: string }>`
         top: 38px;
         left: 56px;
         border-radius: 6px;
-        background: ${(props) => props.darkpurple};
+        background: var(--darkpurple);
     }
     &::after {
         display: block;
@@ -226,16 +218,16 @@ const ScreenL = styled.div<{ navy: string; darkpurple: string }>`
         top: 21px;
         left: 70px;
         border-radius: 6px;
-        background: ${(props) => props.darkpurple};
+        background: var(--darkpurple);
     }
 `;
-const KeyboardL = styled.div<{ navy: string; darkpurple: string }>`
+const KeyboardL = styled.div`
     height: 12px;
     width: 132px;
     position: relative;
     left: -14px;
     border-radius: 0 6px 6px 0;
-    background: ${(props) => props.darkpurple};
+    background: var(--darkpurple);
     &::before {
         display: block;
         content: "";
@@ -244,7 +236,7 @@ const KeyboardL = styled.div<{ navy: string; darkpurple: string }>`
         position: relative;
         left: -68px;
         border-radius: 6px;
-        background: ${(props) => props.navy};
+        background: var(--navy);
     }
 `;
 export default LeftCat;

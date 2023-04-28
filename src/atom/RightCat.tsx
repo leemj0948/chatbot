@@ -1,34 +1,25 @@
 import styled, { keyframes } from "styled-components";
-import { namedColor } from "../components/ChatBg";
 
 interface Props {
-    namedColors: namedColor;
+    namedColors?: string;
 }
 
 const RightCat = ({ namedColors }: Props) => {
     return (
         <Cat>
-            <Ears darkorange={namedColors.darkorange} />
-            <Head
-                darkorange={namedColors.darkorange}
-                orange={namedColors.orange}>
+            <Ears />
+            <Head>
                 <Eyes />
-                <Nose cream={namedColors.cream} />
+                <Nose />
             </Head>
-            <Body orange={namedColors.orange}>
-                <Paw1 cream={namedColors.cream} />
-                <Paw2 cream={namedColors.cream} />
+            <Body>
+                <Paw1 />
+                <Paw2 />
             </Body>
-            <Tail darkorange={namedColors.darkorange} />
+            <Tail />
             <Laptop>
-                <Screen
-                    darkorange={namedColors.darkorange}
-                    peach={namedColors.peach}
-                />
-                <Keyboard
-                    darkorange={namedColors.darkorange}
-                    peach={namedColors.peach}
-                />
+                <Screen />
+                <Keyboard />
             </Laptop>
         </Cat>
     );
@@ -78,12 +69,12 @@ const Cat = styled.section`
     left: 145px;
     transform: translate(0, -50%);
 `;
-const Ears = styled.div<namedColor>`
+const Ears = styled.div`
     height: 0;
     width: 0;
     position: relative;
     left: 30px;
-    border-bottom: 27px solid ${(props) => props.darkorange};
+    border-bottom: 27px solid var(--darkorange);
     border-left: 23px solid transparent;
     border-right: 10px solid transparent;
     &::before {
@@ -93,19 +84,19 @@ const Ears = styled.div<namedColor>`
         width: 0;
         position: relative;
         left: 33px;
-        border-bottom: 27px solid ${(props) => props.darkorange};
+        border-bottom: 27px solid var(--darkorange);
         border-left: 10px solid transparent;
         border-right: 23px solid transparent;
     }
 `;
-const Head = styled.div<{ darkorange: string; orange: string }>`
+const Head = styled.div`
     height: 74px;
     width: 140px;
     position: relative;
     z-index: 2;
-    box-shadow: 8px 0 0 ${(props) => props.darkorange};
+    box-shadow: 8px 0 0 var(--darkorange);
     border-radius: 35px;
-    background: ${(props) => props.orange};
+    background: var(--orange);
 `;
 const Eyes = styled.div`
     height: 12px;
@@ -127,14 +118,14 @@ const Eyes = styled.div`
         background: black;
     }
 `;
-const Nose = styled.div<namedColor>`
+const Nose = styled.div`
     height: 30px;
     width: 48px;
     position: relative;
     top: 40px;
     left: 37px;
     border-radius: 20px;
-    background: ${(props) => props.cream};
+    background: var(--cream);
     &::before {
         display: block;
         content: "";
@@ -149,16 +140,16 @@ const Nose = styled.div<namedColor>`
         border-right: 10px solid transparent;
     }
 `;
-const Body = styled.div<{ orange: string }>`
+const Body = styled.div`
     height: 110px;
     width: 200px;
     position: relative;
     top: -30px;
     z-index: 1;
     border-radius: 55px;
-    background: ${(props) => props.orange};
+    background: var(--orange);
 `;
-const Paw1 = styled.div<namedColor>`
+const Paw1 = styled.div`
     height: 25px;
     width: 37px;
     position: relative;
@@ -166,14 +157,14 @@ const Paw1 = styled.div<namedColor>`
     left: 15px;
     border-radius: 12px;
     animation: 9s ${LeftType} infinite;
-    background: ${(props) => props.cream};
+    background: var(--cream);
 `;
 const Paw2 = styled(Paw1)`
     top: 45px;
     left: 60px;
     animation: 9s ${RightType} infinite;
 `;
-const Tail = styled.div<namedColor>`
+const Tail = styled.div`
     height: 34px;
     width: 70px;
     position: relative;
@@ -181,7 +172,7 @@ const Tail = styled.div<namedColor>`
     left: 150px;
     z-index: 0;
     border-radius: 0 17px 17px 0;
-    background: ${(props) => props.darkorange};
+    background: var(--darkorange);
 `;
 const Laptop = styled.div`
     position: relative;
@@ -189,12 +180,12 @@ const Laptop = styled.div`
     left: -103px;
     z-index: 2;
 `;
-const Screen = styled.div<{ peach: string; darkorange: string }>`
+const Screen = styled.div`
     height: 85px;
     width: 130px;
     border-radius: 8px;
     transform: skew(18deg);
-    background: ${(props) => props.peach};
+    background: var(--peach);
     &::before {
         display: block;
         content: "";
@@ -204,7 +195,7 @@ const Screen = styled.div<{ peach: string; darkorange: string }>`
         top: 38px;
         left: 50px;
         border-radius: 6px;
-        background: ${(props) => props.darkorange};
+        background: var(--darkorange);
     }
     &::after {
         display: block;
@@ -215,16 +206,16 @@ const Screen = styled.div<{ peach: string; darkorange: string }>`
         top: 21px;
         left: 64px;
         border-radius: 6px;
-        background: ${(props) => props.darkorange};
+        background: var(--darkorange);
     }
 `;
-const Keyboard = styled.div<{ peach: string; darkorange: string }>`
+const Keyboard = styled.div`
     height: 12px;
     width: 132px;
     position: relative;
     left: 14px;
     border-radius: 6px 0 0 6px;
-    background: ${(props) => props.darkorange};
+    background: var(--darkorange);
     &::before {
         display: block;
         content: "";
@@ -233,7 +224,7 @@ const Keyboard = styled.div<{ peach: string; darkorange: string }>`
         position: relative;
         left: 128px;
         border-radius: 6px;
-        background: ${(props) => props.peach};
+        background: var(--peach);
     }
 `;
 export default RightCat;
