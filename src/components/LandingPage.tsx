@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router";
-
+import { device } from "../GlobalStyle";
 import styled from "styled-components";
 import cat from "../assets/img/cat.jpeg";
 import background from "../assets/img/background.jpeg";
@@ -26,6 +26,9 @@ const LandingPage = () => {
     );
 };
 const Container = styled.div<{ catBg: string }>`
+    ${device.laptopL} {
+        justify-content: space-evenly;
+    }
     background-image: ${({ catBg }) => `url(${catBg})`};
     background-size: cover;
     background-position: center;
@@ -50,6 +53,11 @@ const TitleWrapper = styled.div`
     z-index: 1;
 `;
 const CatImage = styled.img`
+    ${device.tablet} {
+        width: 50vw;
+        height: 50vw;
+    }
+
     width: 300px;
     height: 300px;
     object-fit: cover;
@@ -59,8 +67,13 @@ const CatImage = styled.img`
 `;
 
 const Title = styled.h1`
+    ${device.tablet} {
+        margin: 0;
+        font-size: 4.5vw;
+    }
+
     font-size: 24px;
-    color: rgb(255 161 185);
+    color: var(--pink);
     text-align: center;
     margin-top: 20px;
     text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
@@ -68,6 +81,10 @@ const Title = styled.h1`
 `;
 
 const Button = styled.button`
+    ${device.tablet} {
+        font-size: 5.5vw;
+    }
+
     background-color: #ffc107;
     color: deeppink;
     font-size: 1.2rem;

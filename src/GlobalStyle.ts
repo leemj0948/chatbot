@@ -11,6 +11,7 @@ const GlobalStyle = createGlobalStyle`
     --cream: #FBF1D8;
     --orange: #FFA852;
     --darkorange: #F07E42;
+
 }
 
 *{
@@ -21,5 +22,18 @@ const GlobalStyle = createGlobalStyle`
 
 
 `;
+const size = {
+    mobile: "768px",
+    laptop: "1024px",
+    laptopL: "1440px",
+    desktop: "2560px",
+};
+export const device = {
+    mobile: `@media (max-width: ${size.mobile})`,
+    tablet: `@media (max-width: ${size.laptop})`,
+    laptopL: `@media (max-width: ${size.laptopL})`,
+    desktop: `@media (max-width: ${size.desktop})`,
+    desktopL: `@media (max-width: ${size.desktop})`,
+};
 
 export default GlobalStyle;

@@ -2,6 +2,7 @@ import axios from "axios";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useQuery } from "react-query";
 import styled, { keyframes } from "styled-components";
+import { device } from "../GlobalStyle";
 
 type MessageType = {
     assistant: string;
@@ -184,7 +185,10 @@ const MessageFrame = styled.section`
     width: 40%;
     height: 100%;
     left: 30%;
-}
+    ${device.mobile} {
+        width: 100%;
+        left: 0;
+    }
 `;
 const ChatBox = styled.div`
     position: absolute;
