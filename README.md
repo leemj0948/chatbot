@@ -13,19 +13,14 @@
     <img src="https://img.shields.io/badge/react_dom-^18.0.2-blueviolet?logo=ReactOS"/>
     <img src="https://img.shields.io/badge/react_router_dom-^6.8.1-critical?logo=React Table"/>
     <img src="https://img.shields.io/badge/node.js-v19.3.0-green?logo=Node.js"/>
-    <img src="https://img.shields.io/badge/firebase-^9.6.1-yellow?logo=firebase"/>
-    <img src="https://img.shields.io/badge/gh__pages-%5.0.0-%23222222?logo=github pages"/>
-    <img src="https://img.shields.io/badge/types-Flow%20%7C%20TypeScript-blue-^9.0.0-orange?logo=uuid"/>
+    <img src="https://img.shields.io/npm/types/typescript?logo=typescript"/>
 </p>
++ styled-component, cloudFlare, Vite
 
 ## 📬 추후 제작 기능 (TODO List)
--  📌 style component로 css in js 환경 구축 및 CSS 수정 
--  📌 typescript 적용하기 
--  📌 기능 구현 : 프로필 이미지 추가 및 변경 사항 추가 
--  📌 기능 구현 : 게시글 이미지 클릭시 확대 기능 추가 
--  📌 기능 구현 : 좋아요, 구독 기능 추가
--  📌 전역 변수 관리 (recoil 적용)
--  📌 react query 사용 ? 
+-  📌 수익화 모델 구축
+-  📌  모바일 반응형 CSS 수정
+
 
 ## 사용 방법
 
@@ -33,7 +28,7 @@
 
 ```
 npm install
-npm start
+npm vite preview
 ```
 
 #### build
@@ -42,22 +37,34 @@ npm start
 npm run build
 ```
 
-#### deploy
+#### dev
 
 ```
-npm run deploy
+npm run dev
 ```
 
 ## 🧸 사용 기술 이슈 
-- firebase 사용 으로 백엔드 기능 최소화 및 개인으로 프로젝트 구현
-- firebase 구글 , 깃헙 로그인 연동 기능 
-- firebase API 활용 및 API 공식문서 확인
-- gh-pages를 활용한 실제 배포 작업 
+- Vite를 이용하여 환경변수 구축 및 배포, 빌드 진행
+- express를 이용하여 백엔드 구축 및 통신 기능 개발
+- cloud flare를 활용한 사이트 배포 진행
+- react-query를 이용하여 openAI API와 통신 구축
+
+
+## 사이트 구성 
+
+### 랜딩 페이지 
+![스크린샷 2023-05-01 오후 4 03 22](https://user-images.githubusercontent.com/75825734/235584492-db8b52ff-5cc4-47ce-816d-d7f8816fbf94.png)
+![스크린샷 2023-05-01 오후 4 03 07](https://user-images.githubusercontent.com/75825734/235584522-09f9bec7-7ca6-4023-8177-53bd68a841ea.png)
+두가지 옵션의 랜덤으로 배경 변화 적용 
+
+### 시작하기 / 입장 
+![메인챗](https://user-images.githubusercontent.com/75825734/235584582-5eeb2e6d-f77f-4a24-be86-3101cebd52dd.gif)
+
+### 채팅하기 
+![채팅](https://user-images.githubusercontent.com/75825734/235584605-a1dc5cef-8de9-4ee4-b9a6-8a58c89fc8cd.gif)
 
 ## 기능 소개 및 회고록 
 
-<a href='https://velog.io/@ljo094822/%ED%8A%B8%EC%9C%84%ED%84%B0-%ED%81%B4%EB%A1%A0%EC%BD%94%EB%94%A9-%ED%9A%8C%EA%B3%A0%EB%A1%9D'> 벨로그 사이트</a>
+<a href='https://velog.io/@ljo094822/openAI-%EC%9D%B4%EC%9A%A9-catbot-%ED%86%A0%EC%9D%B4-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%ED%9A%8C%EA%B3%A0'> 벨로그 사이트</a>
 
-## Reference 
-Thanks for Nico (Nomad Coder)
 
