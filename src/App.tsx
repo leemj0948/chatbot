@@ -6,8 +6,6 @@ import GlobalStyle from "./GlobalStyle";
 
 function App() {
     const queryClient = new QueryClient();
-    console.log(import.meta.env.MODE, ",mode");
-    console.log(import.meta.env.DEV, ",isDev");
     return (
         <QueryClientProvider client={queryClient}>
             <GlobalStyle />
