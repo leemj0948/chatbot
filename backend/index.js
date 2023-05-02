@@ -3,15 +3,17 @@ import express from "express";
 import cors from "cors";
 const API = "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";
 
+const serverless = require("serverless-http");
+
 //express;
 const app = express();
 //cors error handler
-// let corsOptions = {
-//     origin: "https://www.doma.com",
-//     Credentials: true,
-// };
-// app.use(cors(corsOptions));
-app.use(cors());
+let corsOptions = {
+    origin: "https://chatbot-1gi.pages.dev/",
+    Credentials: true,
+};
+app.use(cors(corsOptions));
+// app.use(cors());
 //post call
 app.use(express.json()); // parsing application/json
 app.use(express.urlencoded({ extended: true })); //parsing application/x-www
@@ -20,7 +22,9 @@ app.get("/moviebot", async function (req, res) {
     const answer = await callApi();
     res.send(answer);
 });
-app.listen(3000);
+// app.listen(3000);
+
+module.exports.handler = serverless(app);
 
 //openAI
 
