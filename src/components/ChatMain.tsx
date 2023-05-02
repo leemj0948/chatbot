@@ -13,7 +13,7 @@ const ChatMain = () => {
     const [chatbot, setChatbot] = useState<MessageType[]>([
         {
             assistant:
-                "안녕하세요. 당신의 친구이자 반려묘의 이름은 뭐냐 냥? 지금 뭐하고 있는지도 알려주면 더 좋다 냥",
+                "안녕 냥! 당신의 친구이자 반려묘의 이름은 뭐냐 냥? 지금 뭐하고 있는지도 알려주면 더 좋다 냥",
             user: "",
         },
     ]);
@@ -30,8 +30,10 @@ const ChatMain = () => {
     }, [chatbot]);
 
     const callApi = async (): Promise<string | undefined> => {
+        const RESTAPI = import.meta.env.VITE_RESTAPI;
+        console.log(RESTAPI);
         try {
-            const res = await axios.post("http://localhost:3000/moviebot", {
+            const res = await axios.post(`${RESTAPI}/moviebot`, {
                 user: userinput,
             });
             return res.data.assistant;
@@ -260,7 +262,7 @@ const Bubble = styled.div<{ isUser: Boolean }>`
     display: inline-block;
     margin-bottom: 5px;
     color: ${(props) => (props.isUser ? "rgb(32, 49, 78)" : "#f9fbff")};
-    font-size: 0.7em;
+    font-size: 0.9em;
     padding: 10px 10px 10px 12px;
     border-radius: 20px;
     background-color: ${(props) => (props.isUser ? "beige" : "gray")};
