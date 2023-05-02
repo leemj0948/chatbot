@@ -30,8 +30,10 @@ const ChatMain = () => {
     }, [chatbot]);
 
     const callApi = async (): Promise<string | undefined> => {
+        const RESTAPI = import.meta.env.VITE_RESTAPI;
+        console.log(RESTAPI);
         try {
-            const res = await axios.post("http://localhost:3000/moviebot", {
+            const res = await axios.post(RESTAPI, {
                 user: userinput,
             });
             return res.data.assistant;
