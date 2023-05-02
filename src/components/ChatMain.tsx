@@ -33,7 +33,7 @@ const ChatMain = () => {
         const RESTAPI = import.meta.env.VITE_RESTAPI;
         console.log(RESTAPI);
         try {
-            const res = await axios.post(RESTAPI, {
+            const res = await axios.post(`${RESTAPI}/moviebot`, {
                 user: userinput,
             });
             return res.data.assistant;
