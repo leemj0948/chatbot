@@ -5,37 +5,25 @@ import dotenv from "dotenv";
 dotenv.config();
 const API = process.env.API_KEY;
 
-const serverless = require("serverless-http");
+import serverless from "serverless-http";
 
 //express;
 const app = express();
 //cors error handler
 let corsOptions = {
-    origin: "https://chatbot-1gi.pages.dev/",
-    Credentials: true,
+    origin: [
+        "https://chatbot-1gi.pages.dev/",
+        "http://localhost:5173",
+        "http://localhost:4173",
+    ],
+    credentials: true,
 };
 app.use(cors(corsOptions));
 // app.use(cors());
 //post call
 app.use(express.json()); // parsing application/json
 app.use(express.urlencoded({ extended: true })); //parsing application/x-www
-// let messages = [
-//     {
-//         role: "system",
-//         content:
-//             "당신은 10000편 이상의 영화를 시청하였으며 영화평론가 이자 추천가입니다. 당신은 user의 성향에 따라 알맞은 영화의 장르 및 영화를 추천해줄수 있습니다.",
-//     },
-//     {
-//         role: "user",
-//         content:
-//             "당신은 천만편 이상의 영화를 시청하였으며 영화평론가입니다. 당신은 나의 성향에 따라 알맞은 영화 장르 및 영화를 추천해줄수 있습니다.",
-//     },
-//     {
-//         role: "assistant",
-//         content:
-//             "네 저는 세계에서 알아주는 영화 평론가이며 천만편 이상의 영화를 시청하였습니다. 당신에게 영화를 추천해드리겠습니다. 당신의 취향을 알려주시겠어요? 가능하다면 마지막에 본 영화와 그 영화에 대한 짧은 생각도 함께 부탁드립니다.",
-//     },
-// ];
+
 let messages = [
     {
         role: "system",
@@ -74,9 +62,11 @@ app.post("/moviebot", async function (req, res) {
 
     res.json({ assistant: toStrings(answer) });
 });
+// dev서버에서 살리기
 // app.listen(3000);
 
-module.exports.handler = serverless(app);
+// prod 서버에서 사용
+export const handler = serverless(app);
 
 //openAI
 
