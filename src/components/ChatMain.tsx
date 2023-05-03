@@ -30,7 +30,9 @@ const ChatMain = () => {
     }, [chatbot]);
 
     const callApi = async (): Promise<string | undefined> => {
-        const RESTAPI = import.meta.env.VITE_RESTAPI;
+        const RESTAPI =
+            import.meta.env.VITE_RESTAPI ??
+            "https://b327hv97gk.execute-api.ap-southeast-2.amazonaws.com/prod";
         console.log(RESTAPI);
         try {
             const res = await axios.post(`${RESTAPI}/moviebot`, {
