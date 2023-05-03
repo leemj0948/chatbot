@@ -15,6 +15,7 @@ let corsOptions = {
         "https://chatbot-1gi.pages.dev/",
         "http://localhost:5173",
         "http://localhost:4173",
+        "https://cef020e8.chatbot-1gi.pages.dev/",
     ],
     credentials: true,
 };
