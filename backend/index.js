@@ -12,10 +12,10 @@ const app = express();
 //cors error handler
 let corsOptions = {
     origin: [
-        "https://chatbot-1gi.pages.dev/",
+        "https://chatbot-1gi.pages.dev",
         "http://localhost:5173",
         "http://localhost:4173",
-        "https://cef020e8.chatbot-1gi.pages.dev/",
+        "https://cef020e8.chatbot-1gi.pages.dev",
     ],
     credentials: true,
 };
