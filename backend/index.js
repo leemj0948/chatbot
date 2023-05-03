@@ -64,7 +64,7 @@ app.post("/moviebot", async function (req, res) {
     res.json({ assistant: toStrings(answer) });
 });
 // dev서버에서 살리기
-// app.listen(3000);
+app.listen(3000);
 
 // prod 서버에서 사용
 export const handler = serverless(app);
@@ -76,11 +76,14 @@ const configuration = new Configuration({
 });
 const openai = new OpenAIApi(configuration);
 
-const callApi = async () => {
+const callApi = async (_message) => {
+    if (!_message) {
+        return;
+    }
     try {
         const completion = await openai.createChatCompletion({
             model: "gpt-3.5-turbo",
-            messages: messages,
+            messages: _message,
         });
 
         return completion.data.choices[0].message["content"];
