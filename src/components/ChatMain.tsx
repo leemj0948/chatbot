@@ -188,18 +188,22 @@ const MessageFrame = styled.section`
     width: 40%;
     height: 100%;
     left: 30%;
+    background-color: rgb(139 197 196);
     ${device.mobile} {
         width: 100%;
         left: 0;
+        overflow: hidden;
     }
 `;
 const ChatBox = styled.div`
     position: absolute;
-    border: 6px solid rgb(255, 165, 192);
-    height: 99%;
+    border: 0.5px solid rgb(255, 165, 192);
+    border-bottom: 0;
+    height: 10%;
     width: 100%;
     border-radius: 10px;
     box-shadow: 5px 5px 15px rgba(#777777, 0.5);
+    z-index: 1;
 `;
 const TopBar = styled.div`
     width: 100%;
@@ -239,15 +243,14 @@ const Icons = styled.div`
     cursor: pointer;
 `;
 const Middle = styled.div`
-    position: absolute;
     background: rgb(139 197 196);
-    border: 2px solid rgb(255, 165, 192);
     width: 100%;
     opacity: 0.85;
     top: 60px;
-    height: 93%;
+    height: 80%;
     overflow: scroll;
     max-height: 1200px;
+    padding-top: 15%;
 `;
 const VoldeMort = styled.div`
     width: 100%;
@@ -276,6 +279,12 @@ const Outcoming = styled.div`
     padding: 10px 20px 0 15px;
 `;
 const Typing = styled.div`
+    ${device.mobile} {
+        top: 84%;
+        .bubble {
+            padding: 0.2rem 2rem 1.2rem;
+        }
+    }
     position: absolute;
     top: 90%;
     right: 10%;
@@ -287,6 +296,10 @@ const Typing = styled.div`
     }
 `;
 const Ellipsis = styled.div`
+    ${device.mobile} {
+        width: 2vw;
+        height: 2vw;
+    }
     width: 1vw;
     height: 1vw;
     display: inline-block;
