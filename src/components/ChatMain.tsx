@@ -3,6 +3,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useQuery } from "react-query";
 import styled, { keyframes } from "styled-components";
 import { device } from "../GlobalStyle";
+import KaKaoAd from "../atom/KakaoAd";
 
 type MessageType = {
     assistant: string;
@@ -120,6 +121,14 @@ const ChatMain = () => {
                 </TopBar>
             </ChatBox>
             <Middle>
+                <Ads>
+                    <KaKaoAd
+                        width="320"
+                        height="50"
+                        unit="DAN-ixFe0ZVFNHsEfSdC"
+                        disabled={false}
+                    />
+                </Ads>
                 <VoldeMort>
                     {chatbot.map((message: MessageType, i: number) => {
                         return (
@@ -365,6 +374,15 @@ const Chat = styled.div`
             color: rgb(32, 49, 78);
         }
     }
+`;
+const Ads = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    max-height: 50px;
+    max-width: 320px;
 `;
 
 export default ChatMain;
