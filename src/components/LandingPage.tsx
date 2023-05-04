@@ -4,6 +4,7 @@ import styled from "styled-components";
 import cat from "../assets/img/cat.jpeg";
 import background from "../assets/img/background.jpeg";
 import background2 from "../assets/img/background2.jpeg";
+import KaKaoAd from "../atom/KakaoAd";
 
 const LandingPage = () => {
     const randomBackgroundImg = Math.random() < 0.5 ? background : background2;
@@ -11,6 +12,7 @@ const LandingPage = () => {
     const goMain = () => {
         navigate("/catbot");
     };
+
     return (
         <Container catBg={randomBackgroundImg}>
             <BackgroundOverlay />
@@ -22,16 +24,14 @@ const LandingPage = () => {
                 </Title>
             </TitleWrapper>
             <Button onClick={goMain}>시작하기</Button>
+            <div className="kakaoAds"></div>
             <Ads>
-                <ins
-                    className="kakao_ad_area"
-                    data-ad-unit="DAN-ixFe0ZVFNHsEfSdC"
-                    data-ad-width="320"
-                    data-ad-height="100"></ins>
-                <script
-                    type="text/javascript"
-                    src="//t1.daumcdn.net/kas/static/ba.min.js"
-                    async></script>
+                <KaKaoAd
+                    width="320"
+                    height="100"
+                    unit="DAN-2hoLXp9IAnJEIG5B"
+                    disabled={false}
+                />
             </Ads>
         </Container>
     );
@@ -120,8 +120,5 @@ const Ads = styled.div`
     height: 100%;
     max-height: 100px;
     max-width: 320px;
-    ins {
-        display: none;
-    }
 `;
 export default LandingPage;
