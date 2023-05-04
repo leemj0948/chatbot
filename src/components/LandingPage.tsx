@@ -22,6 +22,17 @@ const LandingPage = () => {
                 </Title>
             </TitleWrapper>
             <Button onClick={goMain}>시작하기</Button>
+            <Ads>
+                <ins
+                    className="kakao_ad_area"
+                    data-ad-unit="DAN-ixFe0ZVFNHsEfSdC"
+                    data-ad-width="320"
+                    data-ad-height="100"></ins>
+                <script
+                    type="text/javascript"
+                    src="//t1.daumcdn.net/kas/static/ba.min.js"
+                    async></script>
+            </Ads>
         </Container>
     );
 };
@@ -99,6 +110,18 @@ const Button = styled.button`
     z-index: 1;
     &:hover {
         background-color: #ffa000;
+    }
+`;
+const Ads = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    max-height: 100px;
+    max-width: 320px;
+    ins {
+        display: none;
     }
 `;
 export default LandingPage;
