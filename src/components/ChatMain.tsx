@@ -126,8 +126,7 @@ const ChatMain = () => {
                         width="320"
                         height="50"
                         unit="DAN-ixFe0ZVFNHsEfSdC"
-                        disabled={false}
-                    />
+                        disabled={false}></KaKaoAd>
                 </Ads>
                 <VoldeMort>
                     {chatbot.map((message: MessageType, i: number) => {
