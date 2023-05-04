@@ -383,7 +383,6 @@ const Ads = styled.div`
     height: 100%;
     max-height: 50px;
     max-width: 320px;
-    background-color: red;
     z-index: 2;
     top: 10%;
 `;
