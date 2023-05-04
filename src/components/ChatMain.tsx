@@ -258,7 +258,7 @@ const Middle = styled.div`
     height: 80%;
     overflow: scroll;
     max-height: 1200px;
-    padding-top: 15%;
+    padding-top: 30%;
 `;
 const VoldeMort = styled.div`
     width: 100%;
@@ -376,12 +376,15 @@ const Chat = styled.div`
 `;
 const Ads = styled.div`
     display: flex;
+    position: fixed;
     justify-content: center;
     align-items: center;
     width: 100%;
     height: 100%;
     max-height: 50px;
     max-width: 320px;
+    z-index: 2;
+    top: 10%;
 `;
 
 export default ChatMain;
