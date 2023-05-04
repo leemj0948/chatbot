@@ -6,6 +6,17 @@ interface Props {
     height: string;
     disabled: boolean;
 }
+interface Adfit {
+    display: (unit: string) => void;
+    destroy: (unit: string) => void;
+    refresh: (unit: string) => void;
+}
+
+declare global {
+    interface Window {
+        adfit?: Adfit;
+    }
+}
 
 function KaKaoAd({ unit, width, height, disabled }: Props) {
     const scriptElementWrapper = useRef<HTMLDivElement | null>(null);
@@ -21,7 +32,7 @@ function KaKaoAd({ unit, width, height, disabled }: Props) {
             scriptElementWrapper.current?.appendChild(script);
 
             return () => {
-                const globalAdfit = window?.adfit;
+                const globalAdfit = "adfit" in window ? window.adfit : null;
                 if (globalAdfit) globalAdfit.destroy(unit);
             };
         }
