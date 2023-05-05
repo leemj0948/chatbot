@@ -4,6 +4,7 @@ import { useQuery } from "react-query";
 import styled, { keyframes } from "styled-components";
 import { device } from "../GlobalStyle";
 import KaKaoAd from "../atom/KakaoAd";
+import { useLocation } from "react-router";
 
 type MessageType = {
     assistant: string;
@@ -11,10 +12,15 @@ type MessageType = {
 };
 
 const ChatMain = () => {
+    const location = useLocation();
+    const { hasCat } = location.state;
+
     const [chatbot, setChatbot] = useState<MessageType[]>([
         {
             assistant:
-                "안녕 냥! 당신의 친구이자 반려묘의 이름은 뭐냐 냥? 지금 뭐하고 있는지도 알려주면 더 좋다 냥",
+                hasCat == "yes"
+                    ? "안녕 냥! 너의 친구이자 반려묘의 이름은 뭐냐 냥? 지금 뭐하고 있는지도 알려주면 더 좋다 냥"
+                    : "좋다 냥! 무엇이 궁금하느뇨 냥?",
             user: "",
         },
     ]);
