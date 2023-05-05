@@ -23,12 +23,14 @@ const GlobalStyle = createGlobalStyle`
 
 `;
 const size = {
+    mobileS: "375px",
     mobile: "768px",
     laptop: "1024px",
     laptopL: "1440px",
     desktop: "2560px",
 };
 export const device = {
+    mobileS: `@media (max-width: ${size.mobileS})`,
     mobile: `@media (max-width: ${size.mobile})`,
     tablet: `@media (max-width: ${size.laptop})`,
     laptopL: `@media (max-width: ${size.laptopL})`,
