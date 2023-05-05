@@ -5,16 +5,19 @@ import cat from "../assets/img/cat.jpeg";
 import background from "../assets/img/background.jpeg";
 import background2 from "../assets/img/background2.jpeg";
 import KaKaoAd from "../atom/KakaoAd";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import React from "react";
 
 const LandingPage = () => {
     const randomBackgroundImg = Math.random() < 0.5 ? background : background2;
     const navigate = useNavigate();
     const goMain = () => {
-        navigate("/catbot");
+        navigate("/catbot", { state: { hasCat: catValue.current } });
     };
-
+    let catValue = useRef("yes");
+    const getValue = (value: string): void => {
+        catValue.current = value;
+    };
     return (
         <Container catBg={randomBackgroundImg}>
             <BackgroundOverlay />
@@ -25,7 +28,7 @@ const LandingPage = () => {
                     <br /> 너의 고양이의 생각과 행동을 분석해준다 냥~
                 </Title>
             </TitleWrapper>
-            <RadioCat />
+            <RadioCat getValue={getValue} />
             <Button onClick={goMain}>시작하기</Button>
             <div className="kakaoAds"></div>
             <Ads>
@@ -40,40 +43,43 @@ const LandingPage = () => {
     );
 };
 
-const RadioCat: React.FC = React.memo(() => {
-    const [hasCat, setHasCat] = useState({ trigger: true, value: "yes" });
-    const catValue = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { value } = e.target;
-        setHasCat({ value: value, trigger: value == "yes" });
-    };
-    return (
-        <CatRadio>
-            <h2>잠깐 냥, 너는 반려묘가 있냥? 😼</h2>
+const RadioCat: React.FC<{ getValue: (value: string) => void }> = React.memo(
+    ({ getValue }) => {
+        const [hasCat, setHasCat] = useState({ trigger: true, value: "yes" });
+        const catValue = (e: React.ChangeEvent<HTMLInputElement>) => {
+            const { value } = e.target;
+            setHasCat({ value: value, trigger: value == "yes" });
+            getValue(value);
+        };
+        return (
+            <CatRadio>
+                <h2>잠깐 냥, 너는 반려묘가 있냥? 😼</h2>
 
-            <input
-                type="radio"
-                name="hasCat"
-                value="yes"
-                checked={hasCat.trigger}
-                onChange={catValue}
-                id="select"
-            />
-            <label htmlFor="select">물론, 고양이를 키우고있지!!</label>
+                <input
+                    type="radio"
+                    name="hasCat"
+                    value="yes"
+                    checked={hasCat.trigger}
+                    onChange={catValue}
+                    id="select"
+                />
+                <label htmlFor="select">물론, 고양이를 키우고있지!!</label>
 
-            <input
-                type="radio"
-                name="hasCat"
-                value="no"
-                checked={!hasCat.trigger}
-                onChange={catValue}
-                id="select2"
-            />
-            <label htmlFor="select2">
-                아니, 고양이는 없지만 궁금한게 있어.
-            </label>
-        </CatRadio>
-    );
-});
+                <input
+                    type="radio"
+                    name="hasCat"
+                    value="no"
+                    checked={!hasCat.trigger}
+                    onChange={catValue}
+                    id="select2"
+                />
+                <label htmlFor="select2">
+                    아니, 고양이는 없지만 궁금한게 있어.
+                </label>
+            </CatRadio>
+        );
+    }
+);
 
 const CatRadio = styled.div`
     ${device.laptopL} {
